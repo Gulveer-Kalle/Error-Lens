@@ -98,3 +98,26 @@
   background-color: #28a745;
   color: #ffffff;
 }
+
+.event-type-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.event-type-error {
+  background-color: #dc3545;
+  color: #ffffff;
+}
+
+.event-type-warning {
+  background-color: #fd7e14;
+  color: #ffffff;
+}
+
+.event-type-info {
+  background-color: #17a2b8;
+  color: #ffffff;
+}

@@ -1,17 +1,54 @@
-<div class="summary-cards">
-  <div class="card">
-    <h3>Total Events</h3>
-    <p *ngIf="!loading">{{ summary.total }}</p>
-    <p *ngIf="loading" class="loading-text">Loading...</p>
+<div class="summary-container">
+  <!-- Top Level Cards -->
+  <div class="top-cards">
+    <div class="card">
+      <h3>Total Events</h3>
+      <p *ngIf="!loading">{{ summary.total }}</p>
+      <p *ngIf="loading" class="loading-text">Loading...</p>
+    </div>
+    <div class="card">
+      <h3>Events (Last 24h)</h3>
+      <p *ngIf="!loading">{{ summary.last24h }}</p>
+      <p *ngIf="loading" class="loading-text">Loading...</p>
+    </div>
   </div>
-  <div class="card">
-    <h3>Critical Errors</h3>
-    <p *ngIf="!loading">{{ summary.critical }}</p>
-    <p *ngIf="loading" class="loading-text">Loading...</p>
-  </div>
-  <div class="card">
-    <h3>Production Errors</h3>
-    <p *ngIf="!loading">{{ summary.production }}</p>
-    <p *ngIf="loading" class="loading-text">Loading...</p>
+
+  <!-- Breakdown Sections -->
+  <div class="breakdown-sections">
+    <!-- Severity Breakdown -->
+    <div class="breakdown-card">
+      <h3>Severity Breakdown</h3>
+      <div class="breakdown-items" *ngIf="!loading">
+        <div class="breakdown-item" *ngFor="let item of summary.severity">
+          <span class="breakdown-label">{{ item.severity }}</span>
+          <span class="breakdown-count">{{ item.count }}</span>
+        </div>
+      </div>
+      <p *ngIf="loading" class="loading-text">Loading...</p>
+    </div>
+
+    <!-- Event Type Breakdown -->
+    <div class="breakdown-card">
+      <h3>Event Type Breakdown</h3>
+      <div class="breakdown-items" *ngIf="!loading">
+        <div class="breakdown-item" *ngFor="let item of summary.eventType">
+          <span class="breakdown-label">{{ item.event_type }}</span>
+          <span class="breakdown-count">{{ item.count }}</span>
+        </div>
+      </div>
+      <p *ngIf="loading" class="loading-text">Loading...</p>
+    </div>
+
+    <!-- Environment Breakdown -->
+    <div class="breakdown-card">
+      <h3>Environment Breakdown</h3>
+      <div class="breakdown-items" *ngIf="!loading">
+        <div class="breakdown-item" *ngFor="let item of summary.environment">
+          <span class="breakdown-label">{{ item.environment }}</span>
+          <span class="breakdown-count">{{ item.count }}</span>
+        </div>
+      </div>
+      <p *ngIf="loading" class="loading-text">Loading...</p>
+    </div>
   </div>
 </div>

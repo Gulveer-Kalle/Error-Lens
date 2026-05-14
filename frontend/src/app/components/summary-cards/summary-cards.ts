@@ -10,7 +10,13 @@ import { EventsService, Summary } from '../../services/events.service';
   styleUrls: ['./summary-cards.css'],
 })
 export class SummaryCards implements OnInit {
-  summary: Summary = { total: 0, critical: 0, production: 0 };
+  summary: Summary = {
+    total: 0,
+    last24h: 0,
+    severity: [],
+    eventType: [],
+    environment: []
+  };
   loading = true;
 
   constructor(private eventsService: EventsService) {}

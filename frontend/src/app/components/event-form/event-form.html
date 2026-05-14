@@ -4,42 +4,66 @@
     <p>Send an event to ErrorLens so the dashboard updates.</p>
   </div>
 
-  <div class="form-row">
-    <label>Application</label>
-    <input type="text" [(ngModel)]="application" placeholder="e.g. frontend" />
-  </div>
+  <form [formGroup]="eventForm" (ngSubmit)="submitEvent()">
+    <div class="form-row">
+      <label>Application *</label>
+      <input type="text" formControlName="application" placeholder="e.g. frontend" />
+      <div class="error" *ngIf="application?.invalid && application?.touched">
+        Application is required
+      </div>
+    </div>
 
-  <div class="form-row">
-    <label>Message</label>
-    <textarea rows="3" [(ngModel)]="message" placeholder="Describe the error"></textarea>
-  </div>
+    <div class="form-row">
+      <label>Message *</label>
+      <textarea rows="3" formControlName="message" placeholder="Describe the error"></textarea>
+      <div class="error" *ngIf="message?.invalid && message?.touched">
+        Message is required
+      </div>
+    </div>
 
-  <div class="form-row split">
-    <label>
-      Severity
-      <select [(ngModel)]="severity">
-        <option value="low">Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
-        <option value="critical">Critical</option>
-      </select>
-    </label>
+    <div class="form-row split">
+      <label>
+        Severity *
+        <select formControlName="severity">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+          <option value="critical">Critical</option>
+        </select>
+      </label>
 
-    <label>
-      Environment
-      <select [(ngModel)]="environment">
-        <option value="development">Development</option>
-        <option value="staging">Staging</option>
-        <option value="production">Production</option>
-      </select>
-    </label>
-  </div>
+      <label>
+        Environment *
+        <select formControlName="environment">
+          <option value="development">Development</option>
+          <option value="staging">Staging</option>
+          <option value="production">Production</option>
+        </select>
+      </label>
+    </div>
 
-  <div class="actions">
-    <button type="button" [disabled]="loading || !application || !message" (click)="submitEvent()">
-      {{ loading ? 'Submitting...' : 'Submit Event' }}
-    </button>
-  </div>
+    <div class="form-row split">
+      <label>
+        Event Type
+        <select formControlName="event_type">
+          <option value="error">Error</option>
+          <option value="warning">Warning</option>
+          <option value="info">Info</option>
+        </select>
+      </label>
+
+      <label>
+        Source
+        <input type="text" formControlName="source" placeholder="e.g. frontend | backend | api" />
+      </label>
+    </div>
+
+    <div class="actions">
+      <button type="submit" [disabled]="loading || eventForm.invalid">
+        {{ loading ? 'Submitting...' : 'Submit Event' }}
+      </button>
+    </div>
+  </form>
 
   <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
   <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>

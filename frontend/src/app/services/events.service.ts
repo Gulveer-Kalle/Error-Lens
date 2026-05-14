@@ -9,13 +9,21 @@ export interface Event {
   message: string;
   severity: 'low' | 'medium' | 'high' | 'critical';
   environment: 'development' | 'staging' | 'production';
+
+  event_type: 'error' | 'warning' | 'info';
+  source: string;
+
+
   created_at: string;
 }
 
+
 export interface Summary {
   total: number;
-  critical: number;
-  production: number;
+  last24h: number;
+  severity: { severity: string; count: number }[];
+  eventType: { event_type: string; count: number }[];
+  environment: { environment: string; count: number }[];
 }
 
 @Injectable({

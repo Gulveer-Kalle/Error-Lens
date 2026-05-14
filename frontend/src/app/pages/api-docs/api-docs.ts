@@ -18,14 +18,18 @@ export class ApiDocs {
     "application": "my-app",
     "message": "Database connection failed",
     "severity": "critical",
-    "environment": "production"
+    "environment": "production",
+    "event_type": "error",
+    "source": "backend"
   }'`;
 
   javascriptExample = `const event = {
   application: "my-app",
   message: "Database connection failed",
   severity: "critical",
-  environment: "production"
+  environment: "production",
+  event_type: "error",
+  source: "backend"
 };
 
 fetch('http://localhost:5000/events', {
@@ -42,7 +46,9 @@ event = {
     "application": "my-app",
     "message": "Database connection failed",
     "severity": "critical",
-    "environment": "production"
+    "environment": "production",
+    "event_type": "error",
+    "source": "backend"
 }
 
 response = requests.post('http://localhost:5000/events', json=event)

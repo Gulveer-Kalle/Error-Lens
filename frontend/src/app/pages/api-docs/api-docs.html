@@ -23,10 +23,12 @@
       <p>Submit a new error or event.</p>
       <p><strong>Request Body:</strong></p>
       <pre><code>{{ '{' }}
-  "application": "string",
-  "message": "string",
-  "severity": "low|medium|high|critical",
-  "environment": "development|staging|production"
+  "application": "string (required)",
+  "message": "string (required)",
+  "severity": "low|medium|high|critical (required)",
+  "environment": "development|staging|production (required)",
+  "event_type": "error|warning|info (optional, default: error)",
+  "source": "string (optional, default: unknown)"
 {{ '}' }}</code></pre>
     </div>
 
@@ -48,8 +50,22 @@
       <p><strong>Response:</strong></p>
       <pre><code>{{ '{' }}
   "total": 42,
-  "critical": 5,
-  "production": 12
+  "last24h": 15,
+  "severity": [
+    {{ '{' }} "severity": "error", "count": 25 {{ '}' }},
+    {{ '{' }} "severity": "warning", "count": 12 {{ '}' }},
+    {{ '{' }} "severity": "info", "count": 5 {{ '}' }}
+  ],
+  "eventType": [
+    {{ '{' }} "event_type": "error", "count": 30 {{ '}' }},
+    {{ '{' }} "event_type": "warning", "count": 8 {{ '}' }},
+    {{ '{' }} "event_type": "info", "count": 4 {{ '}' }}
+  ],
+  "environment": [
+    {{ '{' }} "environment": "production", "count": 20 {{ '}' }},
+    {{ '{' }} "environment": "staging", "count": 15 {{ '}' }},
+    {{ '{' }} "environment": "development", "count": 7 {{ '}' }}
+  ]
 {{ '}' }}</code></pre>
     </div>
   </section>

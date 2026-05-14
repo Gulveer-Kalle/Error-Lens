@@ -30,6 +30,7 @@
         <th>Application</th>
         <th>Message</th>
         <th>Severity</th>
+        <th>Event Type</th>
         <th>Environment</th>
         <th>Timestamp</th>
       </tr>
@@ -39,6 +40,7 @@
         <td>{{ event.application }}</td>
         <td>{{ event.message }}</td>
         <td><span class="severity-badge" [ngClass]="getSeverityClass(event.severity)">{{ event.severity }}</span></td>
+        <td><span class="event-type-badge" [ngClass]="getEventTypeClass(event.event_type)">{{ event.event_type }}</span></td>
         <td>{{ event.environment }}</td>
         <td>{{ event.created_at | date:'short' }}</td>
       </tr>

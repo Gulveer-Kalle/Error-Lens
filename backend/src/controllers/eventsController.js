@@ -7,6 +7,8 @@ const createEvent = async (req, res) => {
       message,
       severity,
       environment,
+      event_type,
+      source,
     } = req.body || {};
 
     if (!application || !message || !severity || !environment) {
@@ -14,6 +16,17 @@ const createEvent = async (req, res) => {
         error: "All fields are required",
       });
     }
+
+    const resolvedEventType = event_type || 'error';
+    const resolvedSource = source || 'unknown';
+
+    const allowedEventTypes = ['error', 'warning', 'info'];
+    if (!allowedEventTypes.includes(resolvedEventType)) {
+      return res.status(400).json({
+        error: 'Invalid event_type',
+      });
+    }
+
 
     const allowedSeverities = [
       "low",
@@ -43,12 +56,13 @@ const createEvent = async (req, res) => {
     const result = await pool.query(
       `
       INSERT INTO events
-      (application, message, severity, environment)
-      VALUES ($1, $2, $3, $4)
+      (application, message, severity, environment, event_type, source)
+      VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING *
       `,
-      [application, message, severity, environment]
+      [application, message, severity, environment, resolvedEventType, resolvedSource]
     );
+
 
     res.status(201).json(result.rows[0]);
 
@@ -100,19 +114,45 @@ const getEvents = async (req, res) => {
 
 const getSummary = async (req, res) => {
   try {
-    const total = await pool.query(`SELECT COUNT(*)::int AS count FROM events`);
-    const critical = await pool.query(`
-      SELECT COUNT(*)::int AS count FROM events WHERE severity='critical'
+    // 1. Total events
+    const total = await pool.query(`
+      SELECT COUNT(*)::int AS count FROM events
     `);
 
-    const production = await pool.query(`
-      SELECT COUNT(*)::int AS count FROM events WHERE environment='production'
+    // 2. Last 24 hours
+    const last24h = await pool.query(`
+      SELECT COUNT(*)::int AS count
+      FROM events
+      WHERE created_at >= NOW() - INTERVAL '24 hours'
+    `);
+
+    // 3. Severity breakdown
+    const severity = await pool.query(`
+      SELECT severity, COUNT(*)::int AS count
+      FROM events
+      GROUP BY severity
+    `);
+
+    // 4. Event type breakdown
+    const eventType = await pool.query(`
+      SELECT event_type, COUNT(*)::int AS count
+      FROM events
+      GROUP BY event_type
+    `);
+
+    // 5. Environment breakdown
+    const environment = await pool.query(`
+      SELECT environment, COUNT(*)::int AS count
+      FROM events
+      GROUP BY environment
     `);
 
     res.json({
       total: total.rows[0].count,
-      critical: critical.rows[0].count,
-      production: production.rows[0].count,
+      last24h: last24h.rows[0].count,
+      severity: severity.rows,
+      eventType: eventType.rows,
+      environment: environment.rows
     });
 
   } catch (err) {

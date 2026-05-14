@@ -1,4 +1,8 @@
-.summary-cards {
+.summary-container {
+  margin-bottom: 2rem;
+}
+
+.top-cards {
   display: flex;
   gap: 1rem;
   margin-bottom: 2rem;
@@ -29,4 +33,49 @@
 .loading-text {
   color: #888888;
   font-size: 0.9rem !important;
+}
+
+.breakdown-sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.breakdown-card {
+  background-color: #2a2a2a;
+  color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.breakdown-card h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  color: #cccccc;
+}
+
+.breakdown-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.breakdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: #1a1a1a;
+  border-radius: 4px;
+}
+
+.breakdown-label {
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.breakdown-count {
+  font-weight: bold;
+  font-size: 1.1rem;
 }
