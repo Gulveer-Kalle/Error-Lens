@@ -28,6 +28,18 @@ const createEvent = async (req, res) => {
       });
     }
 
+    const allowedEnvironments = [
+      "development",
+      "staging",
+      "production",
+    ];
+
+    if (!allowedEnvironments.includes(environment)) {
+      return res.status(400).json({
+        error: "Invalid environment",
+      });
+    }
+
     const result = await pool.query(
       `
       INSERT INTO events
@@ -48,9 +60,10 @@ const createEvent = async (req, res) => {
 
 const getEvents = async (req, res) => {
   try {
-    const { severity, environment, page = 1, limit = 10 } = req.query;
-
-    const offset = (page - 1) * limit;
+    const { severity, environment, page = 1, limit = 100 } = req.query;
+    const pageNum = Number(page) || 1;
+    const limitNum = Number(limit) || 100;
+    const offset = (pageNum - 1) * limitNum;
 
     let query = `SELECT * FROM events`;
     const values = [];
@@ -73,15 +86,11 @@ const getEvents = async (req, res) => {
     query += ` ORDER BY created_at DESC`;
     query += ` LIMIT $${values.length + 1} OFFSET $${values.length + 2}`;
 
-    values.push(limit, offset);
+    values.push(limitNum, offset);
 
     const result = await pool.query(query, values);
 
-    res.json({
-      page: Number(page),
-      limit: Number(limit),
-      data: result.rows,
-    });
+    res.json(result.rows);
 
   } catch (err) {
     console.error(err);
@@ -91,19 +100,19 @@ const getEvents = async (req, res) => {
 
 const getSummary = async (req, res) => {
   try {
-    const total = await pool.query(`SELECT COUNT(*) FROM events`);
+    const total = await pool.query(`SELECT COUNT(*)::int AS count FROM events`);
     const critical = await pool.query(`
-      SELECT COUNT(*) FROM events WHERE severity='critical'
+      SELECT COUNT(*)::int AS count FROM events WHERE severity='critical'
     `);
 
     const production = await pool.query(`
-      SELECT COUNT(*) FROM events WHERE environment='production'
+      SELECT COUNT(*)::int AS count FROM events WHERE environment='production'
     `);
 
     res.json({
-      total_events: total.rows[0].count,
-      critical_events: critical.rows[0].count,
-      production_events: production.rows[0].count,
+      total: total.rows[0].count,
+      critical: critical.rows[0].count,
+      production: production.rows[0].count,
     });
 
   } catch (err) {

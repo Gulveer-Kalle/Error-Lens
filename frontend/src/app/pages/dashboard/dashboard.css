@@ -1,0 +1,5 @@
+.dashboard-content {
+  padding: 2rem;
+  background-color: #121212;
+  min-height: calc(100vh - 80px);
+}

@@ -1,0 +1,17 @@
+<div class="summary-cards">
+  <div class="card">
+    <h3>Total Events</h3>
+    <p *ngIf="!loading">{{ summary.total }}</p>
+    <p *ngIf="loading" class="loading-text">Loading...</p>
+  </div>
+  <div class="card">
+    <h3>Critical Errors</h3>
+    <p *ngIf="!loading">{{ summary.critical }}</p>
+    <p *ngIf="loading" class="loading-text">Loading...</p>
+  </div>
+  <div class="card">
+    <h3>Production Errors</h3>
+    <p *ngIf="!loading">{{ summary.production }}</p>
+    <p *ngIf="loading" class="loading-text">Loading...</p>
+  </div>
+</div>

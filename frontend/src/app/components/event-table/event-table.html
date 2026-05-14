@@ -1,0 +1,50 @@
+<div class="event-table-container">
+  <div class="filters">
+    <div class="filter-group">
+      <label>
+        Severity:
+        <select [(ngModel)]="severityFilter">
+          <option value="">All</option>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+          <option value="critical">Critical</option>
+        </select>
+      </label>
+      <label>
+        Environment:
+        <select [(ngModel)]="environmentFilter">
+          <option value="">All</option>
+          <option value="development">Development</option>
+          <option value="staging">Staging</option>
+          <option value="production">Production</option>
+        </select>
+      </label>
+    </div>
+    <button type="button" class="apply-button" (click)="applyFilters()">Apply filters</button>
+  </div>
+
+  <table class="event-table" *ngIf="!loading">
+    <thead>
+      <tr>
+        <th>Application</th>
+        <th>Message</th>
+        <th>Severity</th>
+        <th>Environment</th>
+        <th>Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let event of events">
+        <td>{{ event.application }}</td>
+        <td>{{ event.message }}</td>
+        <td><span class="severity-badge" [ngClass]="getSeverityClass(event.severity)">{{ event.severity }}</span></td>
+        <td>{{ event.environment }}</td>
+        <td>{{ event.created_at | date:'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="loading">Loading events...</p>
+  <p *ngIf="!loading && events.length === 0">No events found.</p>
+</div>

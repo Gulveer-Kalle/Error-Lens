@@ -1,0 +1,46 @@
+<section class="event-form-card">
+  <div class="form-header">
+    <h2>Submit a sample event</h2>
+    <p>Send an event to ErrorLens so the dashboard updates.</p>
+  </div>
+
+  <div class="form-row">
+    <label>Application</label>
+    <input type="text" [(ngModel)]="application" placeholder="e.g. frontend" />
+  </div>
+
+  <div class="form-row">
+    <label>Message</label>
+    <textarea rows="3" [(ngModel)]="message" placeholder="Describe the error"></textarea>
+  </div>
+
+  <div class="form-row split">
+    <label>
+      Severity
+      <select [(ngModel)]="severity">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+        <option value="critical">Critical</option>
+      </select>
+    </label>
+
+    <label>
+      Environment
+      <select [(ngModel)]="environment">
+        <option value="development">Development</option>
+        <option value="staging">Staging</option>
+        <option value="production">Production</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="actions">
+    <button type="button" [disabled]="loading || !application || !message" (click)="submitEvent()">
+      {{ loading ? 'Submitting...' : 'Submit Event' }}
+    </button>
+  </div>
+
+  <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+</section>

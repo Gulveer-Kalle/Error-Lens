@@ -1,0 +1,90 @@
+<app-navbar></app-navbar>
+<div class="api-page">
+  <div class="page-header">
+    <h1>API Documentation</h1>
+    <p>Integrate ErrorLens into your application using the API endpoint below.</p>
+  </div>
+
+  <section class="api-section">
+    <h2>Base URL</h2>
+    <div class="code-block">
+      <code>{{ apiUrl }}</code>
+      <button type="button" class="copy-button" (click)="copyToClipboard(apiUrl)">
+        {{ copied ? 'Copied!' : 'Copy' }}
+      </button>
+    </div>
+  </section>
+
+  <section class="api-section">
+    <h2>Endpoints</h2>
+    
+    <div class="endpoint">
+      <h3>POST /events</h3>
+      <p>Submit a new error or event.</p>
+      <p><strong>Request Body:</strong></p>
+      <pre><code>{{ '{' }}
+  "application": "string",
+  "message": "string",
+  "severity": "low|medium|high|critical",
+  "environment": "development|staging|production"
+{{ '}' }}</code></pre>
+    </div>
+
+    <div class="endpoint">
+      <h3>GET /events</h3>
+      <p>Fetch all events with optional filters.</p>
+      <p><strong>Query Parameters:</strong></p>
+      <ul>
+        <li><code>severity</code> - Filter by severity (optional)</li>
+        <li><code>environment</code> - Filter by environment (optional)</li>
+      </ul>
+      <p><strong>Example:</strong></p>
+      <code>/events?severity=critical&environment=production</code>
+    </div>
+
+    <div class="endpoint">
+      <h3>GET /events/summary</h3>
+      <p>Get aggregated statistics about events.</p>
+      <p><strong>Response:</strong></p>
+      <pre><code>{{ '{' }}
+  "total": 42,
+  "critical": 5,
+  "production": 12
+{{ '}' }}</code></pre>
+    </div>
+  </section>
+
+  <section class="api-section">
+    <h2>Code Examples</h2>
+
+    <div class="code-example">
+      <h3>cURL</h3>
+      <div class="code-block">
+        <pre><code>{{ curlExample }}</code></pre>
+        <button type="button" class="copy-button" (click)="copyToClipboard(curlExample)">
+          {{ copied ? 'Copied!' : 'Copy' }}
+        </button>
+      </div>
+    </div>
+
+    <div class="code-example">
+      <h3>JavaScript / Node.js</h3>
+      <div class="code-block">
+        <pre><code>{{ javascriptExample }}</code></pre>
+        <button type="button" class="copy-button" (click)="copyToClipboard(javascriptExample)">
+          {{ copied ? 'Copied!' : 'Copy' }}
+        </button>
+      </div>
+    </div>
+
+    <div class="code-example">
+      <h3>Python</h3>
+      <div class="code-block">
+        <pre><code>{{ pythonExample }}</code></pre>
+        <button type="button" class="copy-button" (click)="copyToClipboard(pythonExample)">
+          {{ copied ? 'Copied!' : 'Copy' }}
+        </button>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,121 @@
+.api-page {
+  padding: 2rem;
+  background-color: #121212;
+  min-height: calc(100vh - 80px);
+  color: #f5f5f8;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.page-header h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 2rem;
+  color: #ffffff;
+}
+
+.page-header p {
+  margin: 0;
+  color: #b8b8c8;
+  font-size: 1.05rem;
+}
+
+.api-section {
+  background-color: #1a1a1a;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.api-section h2 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #3b82f6;
+  padding-bottom: 0.75rem;
+}
+
+.api-section h3 {
+  margin: 1rem 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: #7c7ce5;
+}
+
+.endpoint {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.endpoint:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.endpoint p {
+  margin: 0.5rem 0;
+  color: #d1d1e1;
+}
+
+.endpoint ul {
+  margin: 0.5rem 0 0.5rem 1.5rem;
+  padding: 0;
+}
+
+.endpoint li {
+  margin-bottom: 0.25rem;
+  color: #d1d1e1;
+}
+
+.code-block {
+  position: relative;
+  background-color: #0f0f17;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+.code-block code {
+  font-family: 'Courier New', monospace;
+  color: #4ade80;
+  word-break: break-all;
+}
+
+.code-block pre {
+  margin: 0;
+  color: #4ade80;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.copy-button {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.copy-button:hover {
+  background-color: #2563eb;
+}
+
+.code-example {
+  margin-bottom: 2rem;
+}
+
+.code-example h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1rem;
+  color: #ffffff;
+}
