@@ -72,52 +72,72 @@
 }
 
 .severity-badge {
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.875rem;
-  font-weight: bold;
-  text-transform: uppercase;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  text-transform: capitalize;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
 }
 
 .severity-critical {
-  background-color: #dc3545;
-  color: #ffffff;
+  background: rgba(255, 80, 120, 0.12);
+  border-color: rgba(255, 80, 120, 0.35);
+  color: #ffd1dc;
 }
 
 .severity-high {
-  background-color: #fd7e14;
-  color: #ffffff;
+  background: rgba(255, 160, 70, 0.12);
+  border-color: rgba(255, 160, 70, 0.35);
+  color: #ffe7d1;
 }
 
 .severity-medium {
-  background-color: #ffc107;
-  color: #000000;
+  background: rgba(255, 220, 90, 0.12);
+  border-color: rgba(255, 220, 90, 0.35);
+  color: #fff6d6;
 }
 
 .severity-low {
-  background-color: #28a745;
-  color: #ffffff;
+  background: rgba(100, 230, 160, 0.10);
+  border-color: rgba(100, 230, 160, 0.35);
+  color: #d9ffe9;
 }
 
 .event-type-badge {
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.875rem;
-  font-weight: bold;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
   text-transform: capitalize;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
 }
 
 .event-type-error {
-  background-color: #dc3545;
-  color: #ffffff;
+  background: rgba(255, 80, 120, 0.12);
+  border-color: rgba(255, 80, 120, 0.35);
+  color: #ffd1dc;
 }
 
 .event-type-warning {
-  background-color: #fd7e14;
-  color: #ffffff;
+  background: rgba(255, 160, 70, 0.12);
+  border-color: rgba(255, 160, 70, 0.35);
+  color: #ffe7d1;
 }
 
 .event-type-info {
-  background-color: #17a2b8;
-  color: #ffffff;
+  background: rgba(90, 200, 255, 0.12);
+  border-color: rgba(90, 200, 255, 0.35);
+  color: #d6f6ff;
 }
+

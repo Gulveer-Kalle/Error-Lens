@@ -1,10 +1,17 @@
-<nav class="navbar">
-  <div class="navbar-brand">
-    <h1>ErrorLens</h1>
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <img src="/Error_Lens_Logo.png" alt="ErrorLens Logo" class="brand-logo" />
+    <h1>Error_Lens</h1>
   </div>
-  <ul class="navbar-menu">
-    <li><a routerLink="/" routerLinkActive="active">Dashboard</a></li>
-    <li><a routerLink="/submit" routerLinkActive="active">Submit Event</a></li>
-    <li><a routerLink="/api" routerLinkActive="active">API Docs</a></li>
-  </ul>
-</nav>
+
+  <nav class="sidebar-menu">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
+    <a routerLink="/submit" routerLinkActive="active">Submit Event</a>
+    <a routerLink="/api" routerLinkActive="active">API Docs</a>
+    <a routerLink="/settings" routerLinkActive="active">Settings</a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a class="account-link" routerLink="/account" routerLinkActive="active">Account</a>
+  </div>
+</aside>

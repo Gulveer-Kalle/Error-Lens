@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EventsService, Event } from '../../services/events.service';
@@ -19,7 +19,7 @@ export class EventTable implements OnInit {
   environmentFilter: '' | 'development' | 'staging' | 'production' = '';
 
 
-  constructor(private eventsService: EventsService) {}
+  constructor(private eventsService: EventsService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     // Ensure initial load uses current filter defaults bound from the template
@@ -29,17 +29,23 @@ export class EventTable implements OnInit {
 
   loadEvents() {
     this.loading = true;
-    this.eventsService.getEvents(this.severityFilter, this.environmentFilter).subscribe({
+    this.eventsService.getEvents(this.severityFilter || undefined, this.environmentFilter || undefined).subscribe({
       next: (data) => {
+        console.log('Events loaded:', data);
         this.events = data;
         this.loading = false;
+        console.log('Loading state:', this.loading, 'Events count:', this.events.length);
+        this.cdr.markForCheck();
       },
       error: (err) => {
         console.error('Error fetching events:', err);
+        this.events = [];
         this.loading = false;
+        this.cdr.markForCheck();
       }
     });
   }
+
 
   applyFilters() {
     this.loadEvents();
