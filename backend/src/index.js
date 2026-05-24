@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 
 const eventRoutes = require("./routes/events");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/events", eventRoutes);
+app.use("/auth", authRoutes);
 
 const errorHandler = require("./middleware/errorHandler");
 app.use(errorHandler);

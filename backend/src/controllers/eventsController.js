@@ -53,16 +53,16 @@ const createEvent = async (req, res) => {
       });
     }
 
+    const userId = req.user && req.user.userId;
     const result = await pool.query(
       `
       INSERT INTO events
-      (application, message, severity, environment, event_type, source)
-      VALUES ($1, $2, $3, $4, $5, $6)
+      (application, message, severity, environment, event_type, source, user_id)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
       RETURNING *
       `,
-      [application, message, severity, environment, resolvedEventType, resolvedSource]
+      [application, message, severity, environment, resolvedEventType, resolvedSource, userId]
     );
-
 
     res.status(201).json(result.rows[0]);
 
@@ -93,6 +93,13 @@ const getEvents = async (req, res) => {
       conditions.push(`environment = $${values.length}`);
     }
 
+    // scope to user
+    const userId = req.user && req.user.userId;
+    if (userId) {
+      values.push(userId);
+      conditions.push(`user_id = $${values.length}`);
+    }
+
     if (conditions.length > 0) {
       query += " WHERE " + conditions.join(" AND ");
     }
@@ -115,37 +122,42 @@ const getEvents = async (req, res) => {
 const getSummary = async (req, res) => {
   try {
     // 1. Total events
+    const userId = req.user && req.user.userId;
+
     const total = await pool.query(`
-      SELECT COUNT(*)::int AS count FROM events
-    `);
+      SELECT COUNT(*)::int AS count FROM events WHERE user_id = $1
+    `, [userId]);
 
     // 2. Last 24 hours
     const last24h = await pool.query(`
       SELECT COUNT(*)::int AS count
       FROM events
-      WHERE created_at >= NOW() - INTERVAL '24 hours'
-    `);
+      WHERE created_at >= NOW() - INTERVAL '24 hours' AND user_id = $1
+    `, [userId]);
 
     // 3. Severity breakdown
     const severity = await pool.query(`
       SELECT severity, COUNT(*)::int AS count
       FROM events
+      WHERE user_id = $1
       GROUP BY severity
-    `);
+    `, [userId]);
 
     // 4. Event type breakdown
     const eventType = await pool.query(`
       SELECT event_type, COUNT(*)::int AS count
       FROM events
+      WHERE user_id = $1
       GROUP BY event_type
-    `);
+    `, [userId]);
 
     // 5. Environment breakdown
     const environment = await pool.query(`
       SELECT environment, COUNT(*)::int AS count
       FROM events
+      WHERE user_id = $1
       GROUP BY environment
-    `);
+    `, [userId]);
 
     res.json({
       total: total.rows[0].count,

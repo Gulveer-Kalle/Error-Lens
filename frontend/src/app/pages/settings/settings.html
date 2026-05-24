@@ -1,10 +1,22 @@
 <main class="page-main settings-page">
     <div class="page-header">
       <h1>Settings</h1>
-      <p>Placeholder page for application settings. Content will be implemented later.</p>
+      <p>Manage your account details and API access securely.</p>
     </div>
 
-    <section class="placeholder-section">
-      <p>Here you will be able to manage your organization, environment, and notification settings.</p>
+    <section class="settings-section">
+      <div class="settings-card">
+        <h2>API Access</h2>
+        <div class="account-detail">
+          <span class="detail-label">Email</span>
+          <span class="detail-value">{{ email || 'Not signed in' }}</span>
+        </div>
+        <div class="account-detail">
+          <span class="detail-label">Status</span>
+          <span class="detail-value">{{ isAuthenticated ? 'Signed in' : 'Signed out' }}</span>
+        </div>
+        <button type="button" class="secondary" (click)="copyToken()" [disabled]="!isAuthenticated">Copy Token</button>
+        <p *ngIf="copyMessage" class="copy-success">{{ copyMessage }}</p>
+      </div>
     </section>
 </main>

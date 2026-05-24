@@ -7,10 +7,13 @@ const {
   getSummary,
 } = require("../controllers/eventsController");
 
-router.post("/", createEvent);
+const auth = require("../middleware/authMiddleware");
 
-router.get("/", getEvents);
+// Require authentication for events endpoints
+router.post("/", auth, createEvent);
 
-router.get("/summary", getSummary);
+router.get("/", auth, getEvents);
+
+router.get("/summary", auth, getSummary);
 
 module.exports = router;

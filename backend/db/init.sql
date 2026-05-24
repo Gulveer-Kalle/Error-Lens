@@ -1,4 +1,13 @@
-DROP TABLE IF EXISTS events
+DROP TABLE IF EXISTS events;
+
+-- users table for authentication
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  email TEXT NOT NULL UNIQUE,
+  password TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
 
 CREATE TABLE events (
   id SERIAL PRIMARY KEY,
@@ -17,6 +26,7 @@ CREATE TABLE events (
 
   source TEXT NOT NULL DEFAULT 'unknown',
 
+  user_id INTEGER REFERENCES users(id),
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 

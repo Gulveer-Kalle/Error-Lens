@@ -1,10 +1,35 @@
 <main class="page-main account-page">
-    <div class="page-header">
-      <h1>Account</h1>
-      <p>Placeholder account page. Login, user profile, and account actions will be added later.</p>
+  <div class="page-header">
+    <h1>Account</h1>
+    <p>Review your account details and sign out when you’re finished.</p>
+  </div>
+
+  <section class="account-section">
+    <div class="account-card">
+      <h2>Account details</h2>
+
+      <div *ngIf="isAuthenticated; else signedOut">
+        <div class="account-detail">
+          <span class="detail-label">Signed in as</span>
+          <span class="detail-value">{{ email || 'Unknown user' }}</span>
+        </div>
+
+        <button type="button" (click)="logout()">Sign Out</button>
+      </div>
+
+      <ng-template #signedOut>
+        <p class="muted">You are not signed in yet.</p>
+        <div class="auth-actions">
+          <a routerLink="/account/login" class="link-button">Sign In</a>
+          <a routerLink="/account/register" class="link-button secondary">Register</a>
+        </div>
+      </ng-template>
+
+      <div *ngIf="message" class="message-wrap">
+        <p class="message">{{ message }}</p>
+      </div>
     </div>
 
-    <section class="placeholder-section">
-      <p>Once implemented, this page will let users view login status, manage account details, and sign out.</p>
-    </section>
+  </section>
 </main>
+

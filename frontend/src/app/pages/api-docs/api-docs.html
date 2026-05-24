@@ -15,11 +15,43 @@
   </section>
 
   <section class="api-section">
+    <h2>Authentication</h2>
+    <p>Most endpoints require a JWT token in the request headers.</p>
+    <p>The token can be copied securely from the Settings page once you are signed in.</p>
+    <pre><code>Authorization: Bearer &lt;token&gt;</code></pre>
+  </section>
+
+  <section class="api-section">
     <h2>Endpoints</h2>
-    
+
+    <div class="endpoint">
+      <h3>POST /auth/register</h3>
+      <p>Register a new user.</p>
+      <p><strong>Request Body:</strong></p>
+      <pre><code>{{ '{' }}
+  "email": "string (required)",
+  "password": "string (required)"
+{{ '}' }}</code></pre>
+    </div>
+
+    <div class="endpoint">
+      <h3>POST /auth/login</h3>
+      <p>Login and receive a JWT token.</p>
+      <p><strong>Request Body:</strong></p>
+      <pre><code>{{ '{' }}
+  "email": "string (required)",
+  "password": "string (required)"
+{{ '}' }}</code></pre>
+      <p><strong>Response:</strong></p>
+      <pre><code>{{ '{' }}
+  "token": "string"
+{{ '}' }}</code></pre>
+    </div>
+
     <div class="endpoint">
       <h3>POST /events</h3>
-      <p>Submit a new error or event.</p>
+      <p>Submit a new error or event for the authenticated user.</p>
+      <p><strong>Requires:</strong> <code>Authorization: Bearer &lt;token&gt;</code></p>
       <p><strong>Request Body:</strong></p>
       <pre><code>{{ '{' }}
   "application": "string (required)",
@@ -33,7 +65,8 @@
 
     <div class="endpoint">
       <h3>GET /events</h3>
-      <p>Fetch all events with optional filters.</p>
+      <p>Fetch events scoped to the authenticated user.</p>
+      <p><strong>Requires:</strong> <code>Authorization: Bearer &lt;token&gt;</code></p>
       <p><strong>Query Parameters:</strong></p>
       <ul>
         <li><code>severity</code> - Filter by severity (optional)</li>
@@ -45,7 +78,8 @@
 
     <div class="endpoint">
       <h3>GET /events/summary</h3>
-      <p>Get aggregated statistics about events.</p>
+      <p>Get aggregated statistics about events for the authenticated user.</p>
+      <p><strong>Requires:</strong> <code>Authorization: Bearer &lt;token&gt;</code></p>
       <p><strong>Response:</strong></p>
       <pre><code>{{ '{' }}
   "total": 42,

@@ -1,0 +1,39 @@
+<main class="page-main auth-page">
+  <div class="auth-card">
+    <div class="account-brand">
+      <img src="/Error_Lens_Logo.png" alt="ErrorLens Logo" />
+      <h1>Error_Lens</h1>
+    </div>
+
+    <h2>Sign in</h2>
+
+    <form (ngSubmit)="login()">
+      <div class="form-row">
+        <label>
+          Email
+          <input type="email" [(ngModel)]="email" name="email" required />
+        </label>
+      </div>
+
+      <div class="form-row">
+        <label>
+          Password
+          <input type="password" [(ngModel)]="password" name="password" required />
+        </label>
+      </div>
+
+      <button type="submit" [disabled]="loading">
+        {{ loading ? 'Signing in...' : 'Sign In' }}
+      </button>
+    </form>
+
+    <div *ngIf="message" class="message-wrap">
+      <p class="message">{{ message }}</p>
+    </div>
+
+    <p class="muted">
+      New user? <a routerLink="/account/register">Register here</a>
+    </p>
+  </div>
+</main>
+

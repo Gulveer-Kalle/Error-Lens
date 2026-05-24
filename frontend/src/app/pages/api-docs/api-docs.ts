@@ -13,6 +13,7 @@ export class ApiDocs {
   
   curlExample = `curl -X POST http://localhost:5000/events \\
   -H "Content-Type: application/json" \\
+  -H "Authorization: Bearer <token>" \\
   -d '{
     "application": "my-app",
     "message": "Database connection failed",
@@ -22,7 +23,8 @@ export class ApiDocs {
     "source": "backend"
   }'`;
 
-  javascriptExample = `const event = {
+  javascriptExample = `const token = '<token>';
+const event = {
   application: "my-app",
   message: "Database connection failed",
   severity: "critical",
@@ -33,13 +35,18 @@ export class ApiDocs {
 
 fetch('http://localhost:5000/events', {
   method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + token
+  },
   body: JSON.stringify(event)
 })
 .then(r => r.json())
 .then(data => console.log('Event logged:', data));`;
 
   pythonExample = `import requests
+
+token = '<token>'
 
 event = {
     "application": "my-app",
@@ -50,9 +57,13 @@ event = {
     "source": "backend"
 }
 
-response = requests.post('http://localhost:5000/events', json=event)
-print(response.json())`;
+headers = {
+    'Content-Type': 'application/json',
+    'Authorization': f'Bearer {token}'
+}
 
+response = requests.post('http://localhost:5000/events', json=event, headers=headers)
+print(response.json())`;
   copied = false;
 
   copyToClipboard(text: string) {
