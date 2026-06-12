@@ -9,7 +9,7 @@ const distPath = path.join(__dirname, 'dist', 'frontend', 'browser');
 app.use(express.static(distPath));
 
 // SPA fallback - redirect all routes to index.html
-app.get('*', (req, res) => {
+app.use((req, res) => {
   res.sendFile(path.join(distPath, 'index.html'));
 });
 
