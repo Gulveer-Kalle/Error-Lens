@@ -47,4 +47,8 @@ export class EventsService {
   createEvent(event: Omit<Event, 'id' | 'created_at'>): Observable<Event> {
     return this.http.post<Event>(`${environment!.apiUrl}/events`, event);
   }
+
+  deleteEvent(id: number): Observable<void> {
+    return this.http.delete<void>(`${environment!.apiUrl}/events/${id}`);
+  }
 }

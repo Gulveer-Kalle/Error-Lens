@@ -68,3 +68,23 @@ exports.login = async (req, res) => {
     res.status(500).json({ success: false, message: "Login failed" });
   }
 };
+
+exports.deleteAccount = async (req, res) => {
+  try {
+    const userId = req.user && req.user.userId;
+    if (!userId) {
+      return res.status(401).json({ success: false, message: 'Not authenticated' });
+    }
+
+    // remove events owned by user first
+    await pool.query('DELETE FROM events WHERE user_id = $1', [userId]);
+
+    // delete the user
+    await pool.query('DELETE FROM users WHERE id = $1', [userId]);
+
+    res.status(204).end();
+  } catch (err) {
+    console.error('Error deleting account', err);
+    res.status(500).json({ success: false, message: 'Failed to delete account' });
+  }
+};

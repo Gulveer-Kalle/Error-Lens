@@ -47,4 +47,8 @@ export class AuthService {
   getEmail(): string | null {
     return localStorage.getItem('email');
   }
+
+  deleteAccount(): Observable<void> {
+    return this.http.delete<void>(`${environment.apiUrl}/auth`);
+  }
 }

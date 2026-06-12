@@ -25,5 +25,22 @@ export class Account {
     this.message = 'Signed out';
     this.router.navigate(['/account/login']);
   }
+
+  deleteAccount() {
+    const ok = confirm('Delete your account? This will remove your data and cannot be undone.');
+    if (!ok) return;
+
+    this.auth.deleteAccount().subscribe({
+      next: () => {
+        this.auth.logout();
+        this.message = 'Account deleted';
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        console.error('Failed to delete account', err);
+        this.message = 'Failed to delete account';
+      }
+    });
+  }
 }
 

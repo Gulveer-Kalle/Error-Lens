@@ -2,11 +2,14 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EventsService } from '../../services/events.service';
+import { CustomSelectComponent, CustomSelectOption } from '../custom-select/custom-select.component';
+
 
 @Component({
   standalone: true,
   selector: 'app-event-form',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, CustomSelectComponent],
+
   templateUrl: './event-form.html',
   styleUrls: ['./event-form.css'],
 })
@@ -18,7 +21,27 @@ export class EventForm {
 
   @Output() eventCreated = new EventEmitter<void>();
 
+  severityOptions: CustomSelectOption[] = [
+    { value: 'low', label: 'Low' },
+    { value: 'medium', label: 'Medium' },
+    { value: 'high', label: 'High' },
+    { value: 'critical', label: 'Critical' },
+  ];
+
+  environmentOptions: CustomSelectOption[] = [
+    { value: 'development', label: 'Development' },
+    { value: 'staging', label: 'Staging' },
+    { value: 'production', label: 'Production' },
+  ];
+
+  eventTypeOptions: CustomSelectOption[] = [
+    { value: 'error', label: 'Error' },
+    { value: 'warning', label: 'Warning' },
+    { value: 'info', label: 'Info' },
+  ];
+
   constructor(private fb: FormBuilder, private eventsService: EventsService) {
+
     this.eventForm = this.fb.group({
       application: ['', Validators.required],
       message: ['', Validators.required],

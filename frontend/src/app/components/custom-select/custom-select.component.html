@@ -1,0 +1,25 @@
+<div class="custom-select" [ngStyle]="styleVars()">
+
+  <button #trigger type="button" class="custom-select__trigger" (click)="toggle()" aria-haspopup="listbox" [attr.aria-expanded]="open">
+    <span class="custom-select__value">{{ selectedLabel }}</span>
+    <span class="custom-select__chevron" aria-hidden="true">▾</span>
+  </button>
+
+  <div
+    #panel
+    class="custom-select__panel"
+    *ngIf="open"
+    role="listbox"
+  >
+    <button
+      type="button"
+      class="custom-select__option"
+      *ngFor="let opt of options"
+      (click)="selectOption(opt)"
+      [attr.aria-selected]="opt.value === value"
+    >
+      {{ opt.label }}
+    </button>
+  </div>
+</div>
+

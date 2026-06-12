@@ -173,8 +173,37 @@ const getSummary = async (req, res) => {
   }
 };
 
+const deleteEvent = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user && req.user.userId;
+
+    if (!id) {
+      return res.status(400).json({ error: 'Missing event id' });
+    }
+
+    // verify ownership
+    const existing = await pool.query(`SELECT user_id FROM events WHERE id = $1`, [id]);
+    if (existing.rows.length === 0) {
+      return res.status(404).json({ error: 'Event not found' });
+    }
+
+    if (existing.rows[0].user_id !== userId) {
+      return res.status(403).json({ error: 'Not authorized to delete this event' });
+    }
+
+    await pool.query(`DELETE FROM events WHERE id = $1`, [id]);
+
+    res.status(204).end();
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
 module.exports = {
   createEvent,
   getEvents,
   getSummary,
+  deleteEvent,
 }

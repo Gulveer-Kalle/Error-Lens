@@ -1,23 +1,24 @@
 .event-form-card {
-  background-color: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
+  background: var(--card);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 10px;
   padding: 2rem;
-  color: #f5f5f8;
+  color: var(--text);
   width: 100%;
+  box-shadow: var(--shadow-soft);
 }
 
 .form-header h2 {
   margin: 0 0 0.5rem 0;
   font-size: 1.5rem;
-  border-bottom: 2px solid #3b82f6;
+  border-bottom: 2px solid rgba(54, 190, 252, 0.95);
   padding-bottom: 0.75rem;
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.98);
 }
 
 .form-header p {
-  margin: 0;
-  color: #b8b8c8;
+  margin-bottom: 10px;
+  color: var(--muted);
 }
 
 .form-row {
@@ -32,20 +33,60 @@
   gap: 1rem;
 }
 
+/* 4 dropdowns in one row (Severity, Environment, Event Type, Source) */
+.form-row.split.four {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+}
+
+.form-row.split.four label {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Add spacing above the reactive dropdowns and match size of inputs */
+.form-row.split.four app-custom-select {
+  display: block;
+  margin-top: 0.35rem;
+  width: 100%;
+}
+
+.form-row.split.four input[formControlName='source'] {
+  margin-top: 0.35rem;
+  padding-top: 0.45rem;
+  padding-bottom: 0.45rem;
+  height: 34px;
+}
+
+
+
+
 .form-row label {
   font-size: 0.9rem;
-  color: #d1d1e1;
+  color: rgba(209, 209, 225, 0.92);
+  font-weight: 650;
 }
 
 input,
 textarea,
 select {
   width: 100%;
-  background-color: #0f0f17;
+  background: rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  color: #f5f5f8;
-  padding: 0.85rem 0.9rem;
+  border-radius: 12px;
+  color: var(--text);
+  padding: 0.9rem 0.95rem;
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: rgba(54, 190, 252, 0.50);
+  box-shadow: 0 0 0 4px rgba(54, 190, 252, 0.14);
+  background: rgba(0, 0, 0, 0.30);
 }
 
 textarea {
@@ -55,21 +96,31 @@ textarea {
 .actions {
   display: flex;
   justify-content: flex-end;
+  gap: 0.75rem;
 }
 
 button {
-  background-color: #3b82f6;
+  background: #36BEFC;
   border: none;
-  color: white;
+  color: black;
   padding: 0.85rem 1.3rem;
-  border-radius: 10px;
   cursor: pointer;
-  font-weight: 600;
+  height: 40px;
+  transition: transform 120ms ease, box-shadow 160ms ease;
+  border-radius: 6px;
+  font-weight: 700;
+  width: 100%;
+}
+
+
+button:hover {
+    background-color: #2563eb;
 }
 
 button:disabled {
   opacity: 0.45;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 .success,
@@ -79,9 +130,10 @@ button:disabled {
 }
 
 .success {
-  color: #4ade80;
+  color: rgba(74, 222, 128, 0.95);
 }
 
 .error {
-  color: #f87171;
+  color: rgba(248, 113, 113, 0.95);
 }
+

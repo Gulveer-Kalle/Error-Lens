@@ -1,8 +1,4 @@
 <section class="event-form-card">
-  <div class="form-header">
-    <h2>Submit a sample event</h2>
-    <p>Send an event to ErrorLens so the dashboard updates.</p>
-  </div>
 
   <form [formGroup]="eventForm" (ngSubmit)="submitEvent()">
     <div class="form-row">
@@ -21,47 +17,44 @@
       </div>
     </div>
 
-    <div class="form-row split">
+    <div class="form-row split four">
       <label>
         Severity *
-        <select formControlName="severity">
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-          <option value="critical">Critical</option>
-        </select>
+        <app-custom-select
+          formControlName="severity"
+          [options]="severityOptions"
+          [placeholder]="'Severity'">
+        </app-custom-select>
       </label>
 
       <label>
         Environment *
-        <select formControlName="environment">
-          <option value="development">Development</option>
-          <option value="staging">Staging</option>
-          <option value="production">Production</option>
-        </select>
+        <app-custom-select
+          formControlName="environment"
+          [options]="environmentOptions"
+          [placeholder]="'Environment'">
+        </app-custom-select>
       </label>
-    </div>
 
-    <div class="form-row split">
       <label>
         Event Type
-        <select formControlName="event_type">
-          <option value="error">Error</option>
-          <option value="warning">Warning</option>
-          <option value="info">Info</option>
-        </select>
+        <app-custom-select
+          formControlName="event_type"
+          [options]="eventTypeOptions"
+          [placeholder]="'Event Type'">
+        </app-custom-select>
       </label>
 
       <label>
         Source
-        <input type="text" formControlName="source" placeholder="e.g. frontend | backend | api" />
+        <input type="text" formControlName="source" placeholder="e.g. Frontend | Backend | API" />
       </label>
     </div>
 
+
+
     <div class="actions">
-      <button type="submit" [disabled]="loading || eventForm.invalid">
-        {{ loading ? 'Submitting...' : 'Submit Event' }}
-      </button>
+      <button type="submit">Submit Event</button>
     </div>
   </form>
 

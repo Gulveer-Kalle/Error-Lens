@@ -1,5 +1,4 @@
 .settings-page {
-  background-color: #121212;
   min-height: 100vh;
   color: #f5f5f8;
 }
@@ -13,28 +12,35 @@
   font-size: 2rem;
 }
 
+.page-header p {
+  margin: 0;
+  color: #b8b8c8;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 45rem;
+}
+
 .settings-section {
   width: 100%;
   margin: 0 auto;
-  padding: 1rem 0;
 }
 
 .settings-card {
-  width: 100%;
-  background-color: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
+  background: var(--card);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 10px;
   padding: 2rem;
-  margin-bottom: 1.5rem;
-  color: #f5f5f8;
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
+  color: var(--text);
+  width: 100%;
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 30px;
 }
 
 .settings-card h2 {
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
   color: #ffffff;
-  border-bottom: 2px solid rgba(59, 130, 246, 0.9);
+  border-bottom: 2px solid #36BEFC;
   padding-bottom: 0.75rem;
 }
 
@@ -79,14 +85,32 @@
 }
 
 .settings-card button.secondary {
-  background: rgba(255, 255, 255, 0.08);
-  color: #f5f5f8;
+top: 0.75rem;
+right: 0.75rem;
+background-color: #36BEFC;
+color: black;
+border: none;
+padding: 0.5rem 1rem;
+border-radius: 6px;
+cursor: pointer;
+font-size: 0.85rem;
+height: 40px;
+font-weight: 600;
+}
+
+.settings-card button.secondary:hover {
+background-color: #2563eb;
 }
 
 .copy-success {
   margin-top: 0.85rem;
   color: #86efac;
   font-size: 0.95rem;
+}
+
+.muted {
+  color: #b8b8c8;
+  margin-top: 1rem;
 }
 
 .placeholder-section {

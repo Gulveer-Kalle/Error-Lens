@@ -1,12 +1,15 @@
 .sidebar {
-  background-color: #111111;
-  color: #ffffff;
+  /* minimal glass */
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: rgba(255, 255, 255, 0.95);
   width: 240px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 2rem 0.5rem;
-  border-right: 1px solid rgba(255,255,255,0.08);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
   flex-shrink: 0;
 }
 
@@ -21,12 +24,13 @@
   width: 50px;
   height: 50px;
   object-fit: contain;
+  filter: drop-shadow(0 0 14px rgba(54, 190, 252, 0.25));
 }
 
 .sidebar-brand h1 {
   margin: 0;
   font-size: 1.75rem;
-  font-weight: 700;
+  font-weight: 750;
   letter-spacing: 0.04em;
 }
 
@@ -39,30 +43,34 @@
 .sidebar-menu a,
 .account-link {
   display: block;
-  color: #cbd5e1;
+  color: rgba(203, 213, 225, 0.95);
   text-decoration: none;
   padding: 0.9rem 1rem;
-  border-radius: 0.75rem;
-  transition: background-color 0.2s ease, color 0.2s ease;
-  font-weight: 500;
+  border-radius: 12px;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  font-weight: 650;
+  border: 1px solid transparent;
 }
 
 .sidebar-menu a:hover,
 .account-link:hover {
-  background-color: rgba(59,130,246,0.12);
+  background-color: rgba(54, 190, 252, 0.10);
   color: #ffffff;
+  box-shadow: 0 0 0 1px rgba(54, 190, 252, 0.12);
 }
 
 .sidebar-menu a.active,
 .account-link.active {
-  background-color: rgba(59,130,246,0.18);
+  background: linear-gradient(135deg, rgba(54, 190, 252, 0.16), rgba(174, 99, 242, 0.12));
   color: #ffffff;
+  border-color: rgba(54, 190, 252, 0.22);
+  box-shadow: 0 0 28px rgba(54, 190, 252, 0.12);
 }
 
 .sidebar-footer {
   margin-top: auto;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .account-link {
@@ -75,7 +83,7 @@
     width: 100%;
     min-height: auto;
     border-right: none;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     padding: 1rem;
     flex-direction: row;
     flex-wrap: wrap;
@@ -96,3 +104,4 @@
     order: 3;
   }
 }
+

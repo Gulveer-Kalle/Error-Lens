@@ -3,25 +3,24 @@
     <div class="filter-group">
       <label>
         Severity:
-        <select [(ngModel)]="severityFilter">
-          <option value="">All</option>
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-          <option value="critical">Critical</option>
-        </select>
+        <app-custom-select
+          [(value)]="severityFilter"
+          [options]="severityOptions"
+          [placeholder]="'Severity'"
+        ></app-custom-select>
+
       </label>
       <label>
         Environment:
-        <select [(ngModel)]="environmentFilter">
-          <option value="">All</option>
-          <option value="development">Development</option>
-          <option value="staging">Staging</option>
-          <option value="production">Production</option>
-        </select>
+        <app-custom-select
+          [(value)]="environmentFilter"
+          [options]="environmentOptions"
+          [placeholder]="'Environment'"
+        ></app-custom-select>
       </label>
+
     </div>
-    <button type="button" class="apply-button" (click)="applyFilters()">Apply filters</button>
+    <button type="button" class="apply-button" (click)="applyFilters()">Apply Filters</button>
   </div>
 
   <table class="event-table" *ngIf="!loading">
@@ -33,6 +32,7 @@
         <th>Event Type</th>
         <th>Environment</th>
         <th>Timestamp</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -43,6 +43,9 @@
         <td><span class="event-type-badge" [ngClass]="getEventTypeClass(event.event_type)">{{ event.event_type }}</span></td>
         <td>{{ event.environment }}</td>
         <td>{{ event.created_at | date:'short' }}</td>
+        <td>
+          <button type="button" class="row-action-button" (click)="onDelete(event)">Delete</button>
+        </td>
       </tr>
     </tbody>
   </table>

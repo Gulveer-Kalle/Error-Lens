@@ -12,3 +12,14 @@
   overflow-x: hidden;
   padding: 2rem;
 }
+
+/* Ensure router pages share background tokens */
+:host ::ng-deep .page-main,
+:host ::ng-deep .dashboard-content,
+:host ::ng-deep .settings-page,
+:host ::ng-deep .account-page,
+:host ::ng-deep .submit-page,
+:host ::ng-deep .auth-page {
+  background: transparent;
+}
+

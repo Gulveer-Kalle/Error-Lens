@@ -1,4 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+/* Unified 2026 dark SaaS theme (brand: #36BEFC, #AE63F2) */
+
+:root {
+  /* Brand */
+  --brand-blue: #36BEFC;
+  --brand-purple: #AE63F2;
+
+  /* Neutrals */
+  --bg0: #0b0c10;
+  --bg1: #0f1016;
+  --bg2: #12131a;
+  --card: rgba(255, 255, 255, 0.03);
+  --card2: rgba(255, 255, 255, 0.02);
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.66);
+  --border: rgba(255, 255, 255, 0.10);
+  --border2: rgba(255, 255, 255, 0.06);
+
+  /* Focus/active glow */
+  --ring-blue: rgba(54, 190, 252, 0.55);
+  --ring-purple: rgba(174, 99, 242, 0.55);
+
+  /* Radii & spacing */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --shadow-sm: 0 10px 30px rgba(0, 0, 0, 0.25);
+  --shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.20);
+}
+
+html,
+body {
+  height: 100%;
+}
 
 body {
   margin: 0;
@@ -7,14 +40,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #121212;
-  color: #ffffff;
+  background: radial-gradient(900px 600px at 10% -10%, rgba(54, 190, 252, 0.12), transparent 55%),
+    radial-gradient(700px 500px at 90% 0%, rgba(174, 99, 242, 0.12), transparent 55%),
+    linear-gradient(180deg, var(--bg0), var(--bg2));
+  color: var(--text);
 }
 
 * {
   box-sizing: border-box;
 }
 
+/* Layout */
 .page-layout {
   display: flex;
   min-height: 100vh;
@@ -35,3 +71,168 @@ body {
     padding: 1.5rem;
   }
 }
+
+/* Design system primitives */
+.ui-card {
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.ui-card--padded-sm {
+  padding: 1.25rem;
+}
+
+.ui-card-title {
+  margin: 0 0 1rem 0;
+  font-size: 1.35rem;
+  letter-spacing: 0.01em;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.ui-card-subtitle {
+  margin: 0 0 1.25rem 0;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 1.02rem;
+}
+
+/* Buttons */
+.ui-btn {
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.95rem 1.1rem;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.06);
+  transition: transform 120ms ease, background-color 160ms ease, border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.ui-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ui-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(54, 190, 252, 0.18), 0 0 0 1px rgba(54, 190, 252, 0.55);
+}
+
+.ui-btn:active {
+  transform: translateY(1px);
+}
+
+.ui-btn.primary {
+  border-color: rgba(54, 190, 252, 0.25);
+  background: linear-gradient(135deg, rgba(54, 190, 252, 0.20), rgba(174, 99, 242, 0.14)),
+    rgba(255, 255, 255, 0.04);
+  box-shadow: 0 0 0 1px rgba(54, 190, 252, 0.10);
+}
+
+.ui-btn.primary:hover {
+  box-shadow: 0 0 0 1px rgba(54, 190, 252, 0.18), 0 0 24px rgba(54, 190, 252, 0.14);
+}
+
+.ui-btn.secondary {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(174, 99, 242, 0.18);
+}
+
+/* Fields */
+.ui-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.ui-label {
+  font-size: 0.95rem;
+  color: var(--muted);
+  font-weight: 650;
+}
+
+.ui-input,
+.ui-select {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.20);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  color: var(--text);
+  padding: 0.9rem 0.95rem;
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.ui-input::placeholder {
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.ui-input:focus,
+.ui-select:focus {
+  border-color: rgba(54, 190, 252, 0.45);
+  box-shadow: 0 0 0 4px rgba(54, 190, 252, 0.14);
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* Focus glow fallback for native controls */
+input:focus-visible,
+select:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(54, 190, 252, 0.14);
+}
+
+/* Links & text */
+.ui-link {
+  color: rgba(54, 190, 252, 0.95);
+  text-decoration: none;
+  font-weight: 750;
+}
+
+.ui-link:hover {
+  text-decoration: underline;
+}
+
+.ui-muted {
+  color: var(--muted);
+}
+
+/* Messages */
+.ui-message {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.ui-message--error {
+  border-color: rgba(248, 113, 113, 0.35);
+  background: rgba(248, 113, 113, 0.10);
+  color: rgba(255, 180, 180, 1);
+}
+
+.ui-message--success {
+  border-color: rgba(134, 239, 172, 0.35);
+  background: rgba(134, 239, 172, 0.10);
+  color: rgba(190, 255, 210, 1);
+}
+
+/* Minimal glass utility */
+.ui-glass {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
