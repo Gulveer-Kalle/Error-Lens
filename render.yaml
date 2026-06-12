@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: errorlens-backend
+    root: backend
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: DATABASE_URL
+        scope: project
+        previewValue: ${DATABASE_URL}
+      - key: JWT_SECRET
+        scope: project
+        previewValue: ${JWT_SECRET}
+
+  - type: web
+    name: errorlens-frontend
+    root: frontend
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: API_URL
+        scope: project
+        previewValue: https://errorlens-backend.onrender.com
