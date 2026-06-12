@@ -3,9 +3,9 @@ const path = require('path');
 
 const app = express();
 
-// Serve static files from the dist folder
-// Angular 21 outputs to dist/frontend by default
-const distPath = path.join(__dirname, 'dist', 'frontend');
+// Serve static files from the Angular build output folder
+// Angular 21 outputs to dist/frontend/browser
+const distPath = path.join(__dirname, 'dist', 'frontend', 'browser');
 app.use(express.static(distPath));
 
 // SPA fallback - redirect all routes to index.html
