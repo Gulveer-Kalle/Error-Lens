@@ -1,7 +1,5 @@
 # ErrorLens - Error Monitoring Dashboard
 
-![ErrorLens logo](./frontend/public/Error_Lens_Logo.png)
-
 [![CI](https://github.com/Gulveer-Kalle/Error-Lens/actions/workflows/ci.yml/badge.svg)](https://github.com/Gulveer-Kalle/Error-Lens/actions/workflows/ci.yml)
 
 A full-stack error monitoring application for submitting, organizing, and reviewing application events from a web dashboard.
