@@ -19,5 +19,22 @@ describe('CustomSelectComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});
 
+  it('should display the selected label and emit a newly selected value', () => {
+    component.options = [
+      { value: '', label: 'All' },
+      { value: 'critical', label: 'Critical' },
+    ];
+    component.value = 'critical';
+    let emittedValue = '';
+    component.valueChange.subscribe((value) => (emittedValue = value));
+
+    expect(component.selectedLabel).toBe('Critical');
+
+    component.selectOption({ value: '', label: 'All' });
+
+    expect(component.value).toBe('');
+    expect(emittedValue).toBe('');
+    expect(component.open).toBe(false);
+  });
+});

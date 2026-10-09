@@ -17,6 +17,21 @@ This backend provides the API for the ErrorLens dashboard.
    npm run dev
    ```
 
+## Tests
+
+Backend integration tests use PostgreSQL and clear their tables between tests.
+Run them only against a dedicated database named `error_lens_test`; the test
+suite refuses to run against any other database.
+
+```bash
+TEST_DATABASE_URL=postgres://postgres:postgres@localhost:5432/error_lens_test \
+JWT_SECRET=local-test-secret \
+npm test
+```
+
+GitHub Actions starts this disposable database automatically for pull requests
+and pushes to `main`.
+
 ## API
 
 ### Authentication
